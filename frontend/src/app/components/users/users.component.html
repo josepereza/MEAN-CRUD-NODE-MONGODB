@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="name" #name="ngModel" [(ngModel)]="userService.selectedUser.name" placeholder="Ingresa tu nombre"> 
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" name="email" #email="ngModel" [(ngModel)]="userService.selectedUser.email" placeholder="Ingresa tu email"> 
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" name="age" #age="ngModel" [(ngModel)]="userService.selectedUser.age" placeholder="Ingresa tu edad"> 
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field col s12">
+                                    <button class="btn">Agregar</button>
+                                    <button class="btn right" (click)="resetForm(userForm)" >Limpiar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>      
+        </div>
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Edad</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userService.Users">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.age }}</td>          
+                        <td>
+                            <a (click)="editUser(user)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a (click)="deleteUser(user._id)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>              
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
